@@ -137,9 +137,7 @@ class Utils:
 
     def belong_to_obs_width(self,node):
         radius = []
-        r = 0
         delta = self.delta
-        radius.append(r)
         if self.obs_rectangle is not None:
             for (x, y, w, h) in self.obs_rectangle:
                 if 0 <= node.x - (x - delta) <= w + 2 * delta:
@@ -147,13 +145,12 @@ class Utils:
                     radius.append(r)  
                     r = abs(node.y-y+delta)
                     radius.append(r)
+        if len(radius)==0: radius.append(0)
         print(min(radius))
         return min(radius)
     def belong_to_obs_high(self,node):
         radius = []
-        r = 0
         delta = self.delta
-        radius.append(r)
         if self.obs_rectangle is not None:
             for (x, y, w, h) in self.obs_rectangle:
                 if 0 <= node.y - (y - delta) <= h + 2 * delta:
@@ -161,6 +158,7 @@ class Utils:
                     radius.append(r)
                     r = abs(node.x-x+delta)
                     radius.append(r)
+        if len(radius)==0: radius.append(0)
         return min(radius)
     def get_radius(self,node):
         delta = self.delta
